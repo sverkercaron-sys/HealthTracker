@@ -1,25 +1,86 @@
 /**
- * Dashboard Screen - Huvudöversikt (placeholder)
- * Kommer utvecklas i STEG 4
+ * Dashboard Screen - Huvudöversikt med widgets
  */
 
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
 import { useTheme } from '@context/ThemeContext';
 import { useAuth } from '@context/AuthContext';
-import { SPACING, FONT_SIZES, ICON_SIZES } from '@constants/sizes';
+import { StepsWidget } from '@components/dashboard/StepsWidget';
+import { CaloriesWidget } from '@components/dashboard/CaloriesWidget';
+import { WorkoutWidget } from '@components/dashboard/WorkoutWidget';
+import { WaterWidget } from '@components/dashboard/WaterWidget';
+import { SleepWidget } from '@components/dashboard/SleepWidget';
+import { QuickActionFAB } from '@components/dashboard/QuickActionFAB';
+import { SPACING, FONT_SIZES } from '@constants/sizes';
 
 export const DashboardScreen: React.FC = () => {
   const { theme } = useTheme();
   const { user } = useAuth();
 
+  // Mock data - kommer ersättas med riktig data från databas/API
+  const [steps] = useState(7234);
+  const [stepsGoal] = useState(10000);
+  const [caloriesIntake] = useState(1650);
+  const [caloriesBurned] = useState(2100);
+  const [caloriesGoal] = useState(2000);
+  const [waterGlasses, setWaterGlasses] = useState(5);
+  const [waterGoal] = useState(8);
+  const [sleepHours] = useState(7.5);
+  const [sleepQuality] = useState(4);
+  const [workout] = useState({
+    type: 'Löpning',
+    duration: 45,
+    calories: 450,
+  });
+
+  const handleAddWater = () => {
+    setWaterGlasses(waterGlasses + 1);
+    Alert.alert('Bra jobbat!', 'Ett glas vatten tillagt.');
+  };
+
+  const quickActions = [
+    {
+      icon: 'restaurant-outline' as const,
+      label: 'Logga måltid',
+      color: theme.nutrition,
+      onPress: () => Alert.alert('Info', 'Nutrition tracking kommer i STEG 5!'),
+    },
+    {
+      icon: 'barbell-outline' as const,
+      label: 'Logga träning',
+      color: theme.fitness,
+      onPress: () => Alert.alert('Info', 'Fitness tracking kommer i STEG 6!'),
+    },
+    {
+      icon: 'water-outline' as const,
+      label: 'Logga vatten',
+      color: theme.info,
+      onPress: handleAddWater,
+    },
+    {
+      icon: 'scale-outline' as const,
+      label: 'Lägg till mätning',
+      color: theme.metrics,
+      onPress: () => Alert.alert('Info', 'Health metrics kommer i STEG 8!'),
+    },
+  ];
+
+  const getCurrentDate = () => {
+    const days = ['Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'];
+    const now = new Date();
+    return `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]}`;
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
+      {/* Header */}
       <View style={styles.header}>
         <View>
           <Text style={[styles.greeting, { color: theme.textSecondary }]}>Hej,</Text>
           <Text style={[styles.name, { color: theme.text }]}>{user?.name}!</Text>
+          <Text style={[styles.date, { color: theme.textSecondary }]}>{getCurrentDate()}</Text>
         </View>
         <View style={[styles.avatar, { backgroundColor: theme.primary }]}>
           <Text style={styles.avatarText}>
@@ -28,25 +89,50 @@ export const DashboardScreen: React.FC = () => {
         </View>
       </View>
 
-      <ScrollView style={styles.content} contentContainerStyle={styles.contentContainer}>
-        <View style={[styles.iconContainer, { backgroundColor: theme.primary + '20' }]}>
-          <Ionicons name="home-outline" size={ICON_SIZES.xl} color={theme.primary} />
-        </View>
-        <Text style={[styles.title, { color: theme.text }]}>Översikt</Text>
-        <Text style={[styles.description, { color: theme.textSecondary }]}>
-          Här kommer ditt dashboard med:
-        </Text>
-        <View style={styles.featureList}>
-          <Text style={[styles.feature, { color: theme.textSecondary }]}>• Dagens steg och aktivitet</Text>
-          <Text style={[styles.feature, { color: theme.textSecondary }]}>• Kalorier intag vs förbränning</Text>
-          <Text style={[styles.feature, { color: theme.textSecondary }]}>• Träningspass idag</Text>
-          <Text style={[styles.feature, { color: theme.textSecondary }]}>• Vattenintag</Text>
-          <Text style={[styles.feature, { color: theme.textSecondary }]}>• Sömn och återhämtning</Text>
-        </View>
-        <Text style={[styles.comingSoon, { color: theme.primary }]}>
-          Kommer i STEG 4
-        </Text>
+      {/* Widgets */}
+      <ScrollView
+        style={styles.content}
+        contentContainerStyle={styles.contentContainer}
+        showsVerticalScrollIndicator={false}
+      >
+        <StepsWidget
+          steps={steps}
+          goal={stepsGoal}
+          onPress={() => Alert.alert('Info', 'Går till Fitness-screen')}
+        />
+
+        <CaloriesWidget
+          intake={caloriesIntake}
+          burned={caloriesBurned}
+          goal={caloriesGoal}
+          onPress={() => Alert.alert('Info', 'Går till Nutrition-screen')}
+        />
+
+        <WorkoutWidget
+          workout={workout}
+          onPress={() => Alert.alert('Info', 'Går till Fitness-screen')}
+          onLogWorkout={() => Alert.alert('Info', 'Logga träning kommer i STEG 6!')}
+        />
+
+        <WaterWidget
+          glasses={waterGlasses}
+          goal={waterGoal}
+          onPress={() => Alert.alert('Info', 'Går till Nutrition-screen')}
+          onAddGlass={handleAddWater}
+        />
+
+        <SleepWidget
+          hours={sleepHours}
+          quality={sleepQuality}
+          onPress={() => Alert.alert('Info', 'Går till Wellness-screen')}
+        />
+
+        {/* Spacing for FAB */}
+        <View style={{ height: 80 }} />
       </ScrollView>
+
+      {/* Floating Action Button */}
+      <QuickActionFAB actions={quickActions} />
     </View>
   );
 };
@@ -63,11 +149,15 @@ const styles = StyleSheet.create({
     paddingTop: SPACING.xl + 20,
   },
   greeting: {
-    fontSize: FONT_SIZES.md,
+    fontSize: FONT_SIZES.sm,
   },
   name: {
     fontSize: FONT_SIZES.xxl,
     fontWeight: 'bold',
+    marginBottom: 2,
+  },
+  date: {
+    fontSize: FONT_SIZES.xs,
   },
   avatar: {
     width: 50,
@@ -85,37 +175,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    alignItems: 'center',
     padding: SPACING.lg,
-  },
-  iconContainer: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: SPACING.lg,
-  },
-  title: {
-    fontSize: FONT_SIZES.xl,
-    fontWeight: 'bold',
-    marginBottom: SPACING.md,
-  },
-  description: {
-    fontSize: FONT_SIZES.md,
-    marginBottom: SPACING.lg,
-  },
-  featureList: {
-    alignSelf: 'stretch',
-    marginBottom: SPACING.xl,
-  },
-  feature: {
-    fontSize: FONT_SIZES.md,
-    marginBottom: SPACING.sm,
-    lineHeight: 24,
-  },
-  comingSoon: {
-    fontSize: FONT_SIZES.lg,
-    fontWeight: '600',
   },
 });

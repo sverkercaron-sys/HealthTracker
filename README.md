@@ -116,8 +116,18 @@ src/
 - ✅ Färgkodade tabs med ikoner
 - ✅ Temanpassad tab bar
 
-**STEG 4: 🔄 Dashboard** - Nästa
-**STEG 5: Nutrition**
+**STEG 4: ✅ Dashboard** - Klart!
+- ✅ Widget-komponenter (generiska)
+- ✅ StepsWidget med cirkulär progress ring
+- ✅ CaloriesWidget med intag vs förbränning
+- ✅ WorkoutWidget med dagens träning
+- ✅ WaterWidget med quick add
+- ✅ SleepWidget med kvalitets-rating
+- ✅ ProgressRing och ProgressBar komponenter
+- ✅ QuickActionFAB för snabbloggning
+- ✅ Fullständigt dashboard med mock-data
+
+**STEG 5: 🔄 Nutrition** - Nästa
 **STEG 6: Fitness**
 **STEG 7: Wellness**
 
