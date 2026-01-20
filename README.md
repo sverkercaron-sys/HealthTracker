@@ -96,8 +96,17 @@ src/
 - ✅ Theme Context
 - ✅ Auth Context
 
-**STEG 2: 🔄 Autentisering & Onboarding** - Pågår
-**STEG 3: Navigation & Grundstruktur**
+**STEG 2: ✅ Autentisering & Onboarding** - Klart!
+- ✅ LoginScreen med formulärvalidering
+- ✅ RegisterScreen med Firebase integration
+- ✅ OnboardingScreen med välkomstslides
+- ✅ SplashScreen
+- ✅ Återanvändbara komponenter (Input, Button)
+- ✅ Valideringsfunktioner
+- ✅ Auth navigation
+- ✅ Root navigator med auth state routing
+
+**STEG 3: 🔄 Navigation & Grundstruktur** - Nästa
 **STEG 4: Dashboard**
 **STEG 5: Nutrition**
 **STEG 6: Fitness**
