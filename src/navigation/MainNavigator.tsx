@@ -1,14 +1,14 @@
 /**
  * Main Navigator - Navigation för inloggade användare
- * Kommer utökas med tab navigation i STEG 3
+ * Använder TabNavigator som bas
  */
 
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { DashboardScreen } from '@screens/Dashboard/DashboardScreen';
+import { TabNavigator } from './TabNavigator';
 
 export type MainStackParamList = {
-  Dashboard: undefined;
+  MainTabs: undefined;
 };
 
 const Stack = createStackNavigator<MainStackParamList>();
@@ -20,7 +20,7 @@ export const MainNavigator: React.FC = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Dashboard" component={DashboardScreen} />
+      <Stack.Screen name="MainTabs" component={TabNavigator} />
     </Stack.Navigator>
   );
 };
