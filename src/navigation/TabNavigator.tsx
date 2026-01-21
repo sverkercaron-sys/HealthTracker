@@ -10,7 +10,7 @@ import { DashboardScreen } from '@screens/Dashboard/DashboardScreen';
 import { NutritionStack } from './NutritionStack';
 import { FitnessStack } from './FitnessStack';
 import { WellnessStack } from './WellnessStack';
-import { MoreScreen } from '@screens/Settings/MoreScreen';
+import { MoreStack } from './MoreStack';
 import { ICON_SIZES } from '@constants/sizes';
 
 export type TabParamList = {
@@ -107,7 +107,7 @@ export const TabNavigator: React.FC = () => {
       />
       <Tab.Screen
         name="MoreTab"
-        component={MoreScreen}
+        component={MoreStack}
         options={{
           tabBarLabel: 'Mer',
           tabBarIcon: ({ color, focused }) => (

@@ -16,9 +16,10 @@ interface InputProps {
   secureTextEntry?: boolean;
   error?: string | null;
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
-  keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad';
+  keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad' | 'number-pad';
   multiline?: boolean;
   numberOfLines?: number;
+  icon?: keyof typeof Ionicons.glyphMap;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -32,6 +33,7 @@ export const Input: React.FC<InputProps> = ({
   keyboardType = 'default',
   multiline = false,
   numberOfLines = 1,
+  icon,
 }) => {
   const { theme } = useTheme();
   const [isSecure, setIsSecure] = useState(secureTextEntry);
@@ -40,6 +42,11 @@ export const Input: React.FC<InputProps> = ({
     <View style={styles.container}>
       <Text style={[styles.label, { color: theme.text }]}>{label}</Text>
       <View style={styles.inputContainer}>
+        {icon && (
+          <View style={styles.leftIcon}>
+            <Ionicons name={icon} size={20} color={theme.textSecondary} />
+          </View>
+        )}
         <TextInput
           style={[
             styles.input,
@@ -49,6 +56,7 @@ export const Input: React.FC<InputProps> = ({
               borderColor: error ? theme.error : theme.border,
             },
             multiline && styles.multilineInput,
+            icon && styles.inputWithLeftIcon,
           ]}
           value={value}
           onChangeText={onChangeText}
@@ -100,6 +108,17 @@ const styles = StyleSheet.create({
   multilineInput: {
     minHeight: 100,
     textAlignVertical: 'top',
+  },
+  inputWithLeftIcon: {
+    paddingLeft: SPACING.xl + 8,
+  },
+  leftIcon: {
+    position: 'absolute',
+    left: SPACING.md,
+    top: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    zIndex: 1,
   },
   eyeIcon: {
     position: 'absolute',

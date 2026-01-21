@@ -38,7 +38,11 @@ const MenuItem: React.FC<MenuItemProps> = ({ icon, title, subtitle, color, onPre
   );
 };
 
-export const MoreScreen: React.FC = () => {
+interface MoreScreenProps {
+  navigation?: any;
+}
+
+export const MoreScreen: React.FC<MoreScreenProps> = ({ navigation }) => {
   const { theme } = useTheme();
   const { user, logout } = useAuth();
 
@@ -105,7 +109,7 @@ export const MoreScreen: React.FC = () => {
             title="Inställningar"
             subtitle="Anpassa din upplevelse"
             color="#607D8B"
-            onPress={() => console.log('Settings')}
+            onPress={() => navigation?.navigate('Settings')}
           />
         </View>
 
