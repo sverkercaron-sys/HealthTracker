@@ -127,8 +127,18 @@ src/
 - ✅ QuickActionFAB för snabbloggning
 - ✅ Fullständigt dashboard med mock-data
 
-**STEG 5: 🔄 Nutrition** - Nästa
-**STEG 6: Fitness**
+**STEG 5: ✅ Nutrition** - Klart!
+- ✅ NutritionScreen med dagens sammanfattning
+- ✅ Kalorier progress bar
+- ✅ MacroBreakdown-komponent
+- ✅ MealSection - Kollapsbar måltidssektion
+- ✅ FoodItem-komponent
+- ✅ AddMealScreen för att lägga till matvaror
+- ✅ Stack navigation för Nutrition
+- ✅ Mock-data med 4 måltidstyper
+- ✅ Radera matvaror
+
+**STEG 6: 🔄 Fitness** - Nästa
 **STEG 7: Wellness**
 
 ## Scripts

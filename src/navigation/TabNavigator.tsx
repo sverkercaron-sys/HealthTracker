@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@context/ThemeContext';
 import { DashboardScreen } from '@screens/Dashboard/DashboardScreen';
-import { NutritionScreen } from '@screens/Nutrition/NutritionScreen';
+import { NutritionStack } from './NutritionStack';
 import { FitnessScreen } from '@screens/Fitness/FitnessScreen';
 import { WellnessScreen } from '@screens/Wellness/WellnessScreen';
 import { MoreScreen } from '@screens/Settings/MoreScreen';
@@ -62,7 +62,7 @@ export const TabNavigator: React.FC = () => {
       />
       <Tab.Screen
         name="NutritionTab"
-        component={NutritionScreen}
+        component={NutritionStack}
         options={{
           tabBarLabel: 'Nutrition',
           tabBarIcon: ({ color, focused }) => (
