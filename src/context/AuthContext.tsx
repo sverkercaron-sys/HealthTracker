@@ -1,18 +1,9 @@
 /**
  * Auth Context för att hantera användarautentisering
+ * OBS: Använder mock-data för MVP/demo. Byt till Firebase senare.
  */
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  User as FirebaseUser,
-  updateProfile,
-} from 'firebase/auth';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
-import { auth, db } from '@services/firebase';
 import { User } from '../types';
 
 interface AuthContextType {
@@ -31,86 +22,58 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Lyssna på autentiseringsändringar
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      if (firebaseUser) {
-        await loadUserData(firebaseUser);
-      } else {
-        setUser(null);
-      }
+    // Simulera laddning av användarsession
+    const timer = setTimeout(() => {
       setLoading(false);
-    });
+    }, 500);
 
-    return unsubscribe;
+    return () => clearTimeout(timer);
   }, []);
 
-  const loadUserData = async (firebaseUser: FirebaseUser) => {
-    try {
-      const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));
-      if (userDoc.exists()) {
-        setUser({
-          id: firebaseUser.uid,
-          ...userDoc.data(),
-        } as User);
-      }
-    } catch (error) {
-      console.error('Kunde inte ladda användardata:', error);
-    }
-  };
-
   const signUp = async (email: string, password: string, name: string) => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    // Mock signup - simulera delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Uppdatera profil med namn
-      await updateProfile(userCredential.user, { displayName: name });
+    const newUser: User = {
+      id: Date.now().toString(),
+      email,
+      name,
+      createdAt: new Date(),
+    };
 
-      // Skapa användardokument i Firestore
-      const newUser: User = {
-        id: userCredential.user.uid,
-        email,
-        name,
-        createdAt: new Date(),
-      };
-
-      await setDoc(doc(db, 'users', userCredential.user.uid), newUser);
-      setUser(newUser);
-    } catch (error: any) {
-      console.error('Registreringsfel:', error);
-      throw new Error(error.message);
-    }
+    setUser(newUser);
+    console.log('Mock signup success:', newUser);
   };
 
   const signIn = async (email: string, password: string) => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      await loadUserData(userCredential.user);
-    } catch (error: any) {
-      console.error('Inloggningsfel:', error);
-      throw new Error(error.message);
-    }
+    // Mock signin - simulera delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    const mockUser: User = {
+      id: Date.now().toString(),
+      email,
+      name: 'Demo User',
+      createdAt: new Date(),
+    };
+
+    setUser(mockUser);
+    console.log('Mock signin success:', mockUser);
   };
 
   const logout = async () => {
-    try {
-      await signOut(auth);
-      setUser(null);
-    } catch (error: any) {
-      console.error('Utloggningsfel:', error);
-      throw new Error(error.message);
-    }
+    // Mock logout - simulera delay
+    await new Promise(resolve => setTimeout(resolve, 500));
+    setUser(null);
+    console.log('Mock logout success');
   };
 
   const updateUserProfile = async (data: Partial<User>) => {
     if (!user) return;
 
-    try {
-      await setDoc(doc(db, 'users', user.id), data, { merge: true });
-      setUser({ ...user, ...data });
-    } catch (error: any) {
-      console.error('Kunde inte uppdatera profil:', error);
-      throw new Error(error.message);
-    }
+    // Mock update - simulera delay
+    await new Promise(resolve => setTimeout(resolve, 500));
+    setUser({ ...user, ...data });
+    console.log('Mock profile update success:', { ...user, ...data });
   };
 
   return (
