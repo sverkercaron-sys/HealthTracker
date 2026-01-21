@@ -138,8 +138,20 @@ src/
 - ✅ Mock-data med 4 måltidstyper
 - ✅ Radera matvaror
 
-**STEG 6: 🔄 Fitness** - Nästa
-**STEG 7: Wellness**
+**STEG 6: ✅ Fitness** - Klart!
+- ✅ FitnessScreen med steg-tracking
+- ✅ Cirkulär progress ring för dagens steg
+- ✅ Aktivitetsmått (distans, aktiva minuter, våningar)
+- ✅ WorkoutCard-komponent
+- ✅ ActivityMetric-komponent
+- ✅ LogWorkoutScreen för att logga träning
+- ✅ 7 träningstyper att välja mellan
+- ✅ Intensitetsnivåer (låg/medel/hög)
+- ✅ Stack navigation för Fitness
+- ✅ Mock-data med exempel träningspass
+- ✅ Radera träningspass
+
+**STEG 7: 🔄 Wellness** - Nästa
 
 ## Scripts
 

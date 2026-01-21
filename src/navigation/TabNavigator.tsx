@@ -8,7 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@context/ThemeContext';
 import { DashboardScreen } from '@screens/Dashboard/DashboardScreen';
 import { NutritionStack } from './NutritionStack';
-import { FitnessScreen } from '@screens/Fitness/FitnessScreen';
+import { FitnessStack } from './FitnessStack';
 import { WellnessScreen } from '@screens/Wellness/WellnessScreen';
 import { MoreScreen } from '@screens/Settings/MoreScreen';
 import { ICON_SIZES } from '@constants/sizes';
@@ -77,7 +77,7 @@ export const TabNavigator: React.FC = () => {
       />
       <Tab.Screen
         name="FitnessTab"
-        component={FitnessScreen}
+        component={FitnessStack}
         options={{
           tabBarLabel: 'Fitness',
           tabBarIcon: ({ color, focused }) => (

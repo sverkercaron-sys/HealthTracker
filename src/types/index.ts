@@ -54,7 +54,7 @@ export interface Workout {
   id: string;
   userId: string;
   date: Date;
-  type: WorkoutType;
+  type: string; // Träningstyp (t.ex. "Löpning", "Styrketräning")
   duration: number; // minuter
   intensity: IntensityLevel;
   calories: number;
