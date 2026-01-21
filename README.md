@@ -4,13 +4,13 @@ En omfattande hälsoapplikation byggd med React Native (Expo) som integrerar med
 
 ## Funktioner
 
-### MVP (Phase 1)
+### MVP (Phase 1) - ✅ KOMPLETT!
 - ✅ Autentisering (registrering, inloggning)
 - ✅ Onboarding
-- ✅ Dashboard med widgets
-- 🔄 Nutrition tracking (mat, vatten)
-- 🔄 Fitness tracking (träning, steg)
-- 🔄 Wellness tracking (sömn, humör)
+- ✅ Dashboard med 5 interaktiva widgets
+- ✅ Nutrition tracking (mat, vatten, kalorier, makron)
+- ✅ Fitness tracking (träning, steg, aktivitet)
+- ✅ Wellness tracking (sömn, humör, stress)
 
 ### Kommande funktioner
 - Health metrics (vikt, blodtryck, blodsocker)
@@ -40,27 +40,54 @@ En omfattande hälsoapplikation byggd med React Native (Expo) som integrerar med
 
 ### Installation
 
-1. Klona repot och navigera till mappen:
+#### Steg 1: Ladda ner koden från GitHub
+
+1. Gå till detta repo på GitHub: `https://github.com/DITT-ANVÄNDARNAMN/HealthTracker`
+2. Klicka på **Code** (grön knapp) → **Download ZIP**
+3. Packa upp ZIP-filen någonstans på din dator (t.ex. `Dokument/HealthTracker`)
+
+**ELLER** om du har Git installerat, öppna en terminal och skriv:
 ```bash
+git clone https://github.com/DITT-ANVÄNDARNAMN/HealthTracker.git
 cd HealthTracker
 ```
 
-2. Installera dependencies:
+#### Steg 2: Öppna en terminal i projektmappen
+
+- **Windows**: Högerklicka i mappen → "Öppna i Terminal" eller "Git Bash Here"
+- **Mac**: Högerklicka i mappen → "Ny terminal vid mapp"
+- **Linux**: Högerklicka i mappen → "Öppna terminal här"
+
+#### Steg 3: Installera beroenden
+
+I terminalen, skriv:
 ```bash
 npm install
 ```
+Vänta medan alla paket laddas ner (kan ta 2-5 minuter).
 
-3. Konfigurera Firebase:
-   - Skapa ett projekt på [Firebase Console](https://console.firebase.google.com/)
-   - Skapa en webbapp i ditt Firebase-projekt
-   - Kopiera konfigurationsvärdena till `src/services/firebase.ts`
+#### Steg 4: Installera Expo Go på din telefon
 
-4. Starta utvecklingsservern:
+- **iPhone**: Öppna App Store → Sök "Expo Go" → Installera
+- **Android**: Öppna Google Play → Sök "Expo Go" → Installera
+
+#### Steg 5: Starta appen
+
+I terminalen (där du är i HealthTracker-mappen), skriv:
 ```bash
-npm start
+npx expo start
 ```
 
-5. Skanna QR-koden med Expo Go-appen på din mobil
+Du kommer se en QR-kod i terminalen!
+
+#### Steg 6: Öppna på din telefon
+
+1. **iPhone**: Öppna Kamera-appen → Scanna QR-koden → Tryck på notisen
+2. **Android**: Öppna Expo Go → Tryck "Scan QR code" → Scanna QR-koden
+
+Appen laddas och startar på din telefon! 🎉
+
+> **Tips**: Se till att både datorn och telefonen är på samma WiFi-nätverk!
 
 ## Projektstruktur
 
@@ -151,7 +178,19 @@ src/
 - ✅ Mock-data med exempel träningspass
 - ✅ Radera träningspass
 
-**STEG 7: 🔄 Wellness** - Nästa
+**STEG 7: ✅ Wellness** - Klart!
+- ✅ WellnessScreen med dagens data
+- ✅ Sömn-tracking (timmar, kvalitet, tider)
+- ✅ Humör-tracking med emoji-väljare
+- ✅ Stress-tracking med slider (1-10, färgkodad)
+- ✅ LogSleepScreen
+- ✅ LogMoodScreen
+- ✅ MoodPicker-komponent
+- ✅ StressSlider-komponent
+- ✅ Stack navigation för Wellness
+- ✅ Mock-data för demonstration
+
+🎉 **MVP KOMPLETT! Alla 7 steg klara!**
 
 ## Scripts
 
