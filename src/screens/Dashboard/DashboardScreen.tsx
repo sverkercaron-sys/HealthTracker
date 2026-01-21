@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
 import { useTheme } from '@context/ThemeContext';
 import { useAuth } from '@context/AuthContext';
+import { useSettings } from '@context/SettingsContext';
 import { StepsWidget } from '@components/dashboard/StepsWidget';
 import { CaloriesWidget } from '@components/dashboard/CaloriesWidget';
 import { WorkoutWidget } from '@components/dashboard/WorkoutWidget';
@@ -17,15 +18,13 @@ import { SPACING, FONT_SIZES } from '@constants/sizes';
 export const DashboardScreen: React.FC = () => {
   const { theme } = useTheme();
   const { user } = useAuth();
+  const { settings } = useSettings();
 
   // Mock data - kommer ersättas med riktig data från databas/API
   const [steps] = useState(7234);
-  const [stepsGoal] = useState(10000);
   const [caloriesIntake] = useState(1650);
   const [caloriesBurned] = useState(2100);
-  const [caloriesGoal] = useState(2000);
   const [waterGlasses, setWaterGlasses] = useState(5);
-  const [waterGoal] = useState(8);
   const [sleepHours] = useState(7.5);
   const [sleepQuality] = useState(4);
   const [workout] = useState({
@@ -97,14 +96,14 @@ export const DashboardScreen: React.FC = () => {
       >
         <StepsWidget
           steps={steps}
-          goal={stepsGoal}
+          goal={settings.dailyStepGoal}
           onPress={() => Alert.alert('Info', 'Går till Fitness-screen')}
         />
 
         <CaloriesWidget
           intake={caloriesIntake}
           burned={caloriesBurned}
-          goal={caloriesGoal}
+          goal={settings.dailyCalorieGoal}
           onPress={() => Alert.alert('Info', 'Går till Nutrition-screen')}
         />
 
@@ -116,7 +115,7 @@ export const DashboardScreen: React.FC = () => {
 
         <WaterWidget
           glasses={waterGlasses}
-          goal={waterGoal}
+          goal={settings.dailyWaterGoal}
           onPress={() => Alert.alert('Info', 'Går till Nutrition-screen')}
           onAddGlass={handleAddWater}
         />
