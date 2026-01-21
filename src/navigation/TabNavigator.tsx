@@ -9,7 +9,7 @@ import { useTheme } from '@context/ThemeContext';
 import { DashboardScreen } from '@screens/Dashboard/DashboardScreen';
 import { NutritionStack } from './NutritionStack';
 import { FitnessStack } from './FitnessStack';
-import { WellnessScreen } from '@screens/Wellness/WellnessScreen';
+import { WellnessStack } from './WellnessStack';
 import { MoreScreen } from '@screens/Settings/MoreScreen';
 import { ICON_SIZES } from '@constants/sizes';
 
@@ -92,7 +92,7 @@ export const TabNavigator: React.FC = () => {
       />
       <Tab.Screen
         name="WellnessTab"
-        component={WellnessScreen}
+        component={WellnessStack}
         options={{
           tabBarLabel: 'Wellness',
           tabBarIcon: ({ color, focused }) => (
